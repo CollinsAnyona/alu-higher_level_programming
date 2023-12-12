@@ -1,21 +1,11 @@
 #!/usr/bin/python3
-"""Adds two numbers"""
+''' Integers addition '''
 
 
 def add_integer(a, b=98):
-    """
-    Returns sum of a and b
-    - Args :
-        a: int or float
-        b: int or float, default 98
-    """
-    if type(a) == float or type(b) == float:
-        a = int(a)
-        b = int(b)
-
-    if type(a) != int:
+    ''' Adds two integers and/or floats together '''
+    if a is None or type(a) is not int and type(a) is not float:
         raise TypeError("a must be an integer")
-    if type(b) != int:
+    if type(b) is not int and type(b) is not float:
         raise TypeError("b must be an integer")
-
-    return a + b
+    return int(a) + int(b)
