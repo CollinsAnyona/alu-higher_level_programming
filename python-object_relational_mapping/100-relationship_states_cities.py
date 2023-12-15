@@ -1,12 +1,14 @@
 #!/usr/bin/python3
-'''a script that updates State object
-from the database hbtn_0e_6_usa
+'''Creates new state: California. with the city: “San Francisco”
+ from the database hbtn_0e_100_usa
 '''
-from sqlalchemy import create_engine
+
 import sys
+from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from sqlalchemy.exc import NoResultFound
-from model_state import Base, State
+from relationship_state import State
+from relationship_city import Base, City
+
 
 if __name__ == "__main__":
     engine = create_engine(
@@ -16,10 +18,9 @@ if __name__ == "__main__":
             db=sys.argv[3],
             pool_pre_ping=True)
     )
-    engine.connect()
+    Base.metadata.create_all(engine)
     Session = sessionmaker(bind=engine)
     session = Session()
-    second_state = session.query(State).filter(State.id == 2).one()
-    second_state.name = "New Mexico"
+    new_city = City(name="San Francisco", state=State(name="California"))
+    session.add(new_city)
     session.commit()
-    session.close()
