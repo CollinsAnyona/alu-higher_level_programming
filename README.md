@@ -1,1 +1,1 @@
-Python classes
+This is an introduction to JS
